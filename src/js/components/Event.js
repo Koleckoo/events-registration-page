@@ -63,11 +63,11 @@ export class Event {
 
         this.addListenertoButton();
         this.addListenertoButtonOff();
+        this.addListenerRegister();
     }
 
     addListenertoButton = () => {
         const moreButton = this.element.querySelector(".event__btn-more");
-        
         moreButton.addEventListener(("click"), () => {
             this.displayModal = !this.displayModal;
             this.createNewEvent();
@@ -83,4 +83,35 @@ export class Event {
         })
     }
 
+    addListenerRegister = () => {
+        const register = this.element.querySelector(".register");
+
+        register.addEventListener(("click"), (event) => {
+            event.preventDefault();
+            this.postInfo();
+        })
+    }
+
+    postInfo = async() => {
+    const url = `https://test-api.codingbootcamp.cz/api/f8df0d4d/events`;
+
+    let data = {
+        first_name: this.element.querySelector("#name").value,
+        last_name: this.element.querySelector("#lname").value,
+        email: this.element.querySelector("#email").value,
+        phone_number: this.element.querySelector("#phone-number").value,
+        age: this.element.querySelector("#age").value
+    
+    }
+    const register = await fetch (url, {
+        'method':'POST',
+        'body':JSON.stringify(data),
+        'headers': {
+            'content-type': 'application/json'
+        }
+    })
+    const readableResponse = await register.json();
+    console.log(readableResponse)
+  }
 }
+

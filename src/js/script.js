@@ -46,8 +46,10 @@ const eventList = [
 ]
 
 eventList.forEach((event, index) =>{
-    const newElement = new Event({name: event.name});
-    const sectionForEvents = document.querySelector(".small_event")
-    sectionForEvents.appendChild(newElement.element)
+    const newElement = new Event({name: event.name, id: event.id});
+    const sectionForEvents = document.querySelector(".small_event");
+    sectionForEvents.appendChild(newElement.element);
+
 })
+
 

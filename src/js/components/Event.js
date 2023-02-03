@@ -11,8 +11,10 @@ export class Event {
 
         this.displayModal = false;
 
-        
+        this.registered = false;
 
+        
+    
         this.createNewEvent();
     }
     
@@ -29,21 +31,24 @@ export class Event {
                     <img src="${this.image_url}">
                     Description: ${this.description}
                     <div class = 'form__container'>
-                        <form action="submit">
-                            <label for="name">*First Name:</label>
-                            <input type="text" id="name" required>
-                            <label for="lname">*Last Name:</label>
-                            <input type="text" id="lname" required>
-                            <label for="email">*email:</label>
-                            <input type="email" id="email" required>
-                            <label for="phone-number"> *phone: </label>
-                            <input type="text" id="phone-number" required>
-                            <label for="age">
-                                <input type="checkbox" id="age" required>
-                                *I'm old enough to participate
-                            </label>
-                            <input class="register" type="submit" value="Register">
-                        </form>
+                        ${
+                            this.registered ? "":
+                            `<form action="submit">
+                                <label for="name">*First Name:</label>
+                                <input type="text" id="name" required>
+                                <label for="lname">*Last Name:</label>
+                                <input type="text" id="lname" required>
+                                <label for="email">*email:</label>
+                                <input type="email" id="email" required>
+                                <label for="phone-number"> *phone: </label>
+                                <input type="text" id="phone-number" required>
+                                <label for="age">
+                                    <input type="checkbox" id="age" required>
+                                    *I'm old enough to participate
+                                </label>
+                                <input class="register" type="submit" value="Register">
+                            </form>`
+                        }
                     </div>
                     <button class="event__btn-less">&#9587;</button>
 
@@ -63,7 +68,8 @@ export class Event {
 
         this.addListenertoButton();
         this.addListenertoButtonOff();
-        this.addListenerRegister();
+        !this.registered && this.addListenerRegister();
+        
     }
 
     addListenertoButton = () => {
@@ -93,25 +99,32 @@ export class Event {
     }
 
     postInfo = async() => {
-    const url = `https://test-api.codingbootcamp.cz/api/f8df0d4d/events`;
+        const url = `https://test-api.codingbootcamp.cz/api/f8df0d4d/events/${this.id}/registrations`;
 
-    let data = {
-        first_name: this.element.querySelector("#name").value,
-        last_name: this.element.querySelector("#lname").value,
-        email: this.element.querySelector("#email").value,
-        phone_number: this.element.querySelector("#phone-number").value,
-        age: this.element.querySelector("#age").value
-    
-    }
-    const register = await fetch (url, {
-        'method':'POST',
-        'body':JSON.stringify(data),
-        'headers': {
-            'content-type': 'application/json'
+        let data = {
+            first_name: this.element.querySelector("#name").value,
+            last_name: this.element.querySelector("#lname").value,
+            email: this.element.querySelector("#email").value,
+            phone_number: this.element.querySelector("#phone-number").value,
+            age: this.element.querySelector("#age").value
+        
         }
-    })
-    const readableResponse = await register.json();
-    console.log(readableResponse)
+        const register = await fetch (url, {
+            'method':'POST',
+            'body':JSON.stringify(data),
+            'headers': {
+                'content-type': 'application/json'
+            }
+        })
+        const readableResponse = await register.json();
+        console.log(readableResponse)
+        
+        if (readableResponse.status === 'success') {
+            alert("You have been registered!")
+            this.registered = !this.registered
+            this.createNewEvent()
+        }
+    }
   }
-}
+
 

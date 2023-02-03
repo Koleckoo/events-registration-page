@@ -26,10 +26,10 @@ export class Event {
             <div id="myModal" class="event__modal">
                 <div class="overlay"></div>
                 <div class="event__modal-content">
-                    Name of the Event: ${this.name}<br>
-                    Date: ${this.date}
+                    <strong>Name of the Event:</strong> ${this.name}<br>
+                    <strong>Date:</strong> ${this.date}
                     <img src="${this.image_url}">
-                    Description: ${this.description}
+                    <strong>Description:</strong> ${this.description}
                     <div class = 'form__container'>
                         ${
                             this.registered ? "":

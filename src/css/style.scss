@@ -1,0 +1,41 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.featured-event__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  width: 80vw;
+  height: 45vh;
+  background-color: grey;
+  border-radius: 0.5rem;
+}
+.featured-event__button {
+  background-color: beige;
+  border: solid 1px black;
+}
+
+.featured-event__image {
+  width: 30%;
+  img {
+    width: 100%;
+    height: 80%;
+  }
+}
+.featured-event__text--vertical {
+  transform: rotate(-90deg);
+  width: 10%;
+}

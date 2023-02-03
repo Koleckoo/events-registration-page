@@ -84,7 +84,8 @@ body {
 
 .featured-event__image {
   display: flex;
-  width: 30%;
+  justify-content: center;
+  width: 60%;
   img {
     width: 60%;
     height: auto;

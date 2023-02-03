@@ -1,6 +1,15 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 35px;
   .navbar {
     display: flex;
     justify-content: space-between;
@@ -19,17 +28,22 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  height: 50vh;
+  width: 30vw;
 }
 .event {
   font-size: larger;
   text-align: center;
-  width: 10rem;
+  width: 80%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 5rem;
   background-color: #bfbfbd;
+  border-radius: 1rem;
   .event__btn-more {
     text-align: center;
     font-size: larger;
@@ -42,18 +56,13 @@ header {
     border-radius: 10%;
   }
 }
-html {
-  box-sizing: border-box;
-}
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
 
 body {
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .featured-event__container {
@@ -66,6 +75,7 @@ body {
   height: 45vh;
   background-color: grey;
   border-radius: 0.5rem;
+  margin-bottom: 35px;
 }
 .featured-event__button {
   background-color: beige;
@@ -73,10 +83,11 @@ body {
 }
 
 .featured-event__image {
+  display: flex;
   width: 30%;
   img {
-    width: 100%;
-    height: 80%;
+    width: 60%;
+    height: auto;
   }
 }
 .featured-event__text--vertical {
@@ -86,6 +97,10 @@ body {
 
 .small_event {
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100vw;
+  padding: 30px;
 }
 
 #myModal {
@@ -107,8 +122,34 @@ body {
 
 .event__modal-content {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
-  height: 300px;
-  width: 300px;
-  background-color: black;
+  height: auto;
+  width: 60%;
+  background-color: white;
+  color: black;
+  img {
+    width: 60%;
+    height: auto;
+  }
+}
+.form__container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  form {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

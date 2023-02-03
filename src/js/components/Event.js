@@ -2,12 +2,16 @@ export class Event {
     constructor(properties) {
         this.element = document.createElement("div")
         this.element.classList.add("events__container");
-        this.id = properties.id
-
-        this.displayModal = false;
-        this.overlayOn = false;
 
         this.name = properties.name
+        this.id = properties.id
+        this.date = properties.date
+        this.description = properties.description
+        this.image_url = properties.image_url
+
+        this.displayModal = false;
+
+        
 
         this.createNewEvent();
     }
@@ -15,12 +19,37 @@ export class Event {
     createNewEvent = () => {
         this.element.innerHTML = `
         <div class="event">
-        ${this.name}
-        <button id="${this.id}" class="event__btn-more">More</button>
-        <div id="myModal" class="event__modal">
-        <div class="overlay"></div>
-        <div class="event__modal-content"></div>
-        </div>
+            ${this.name}
+            <button id="${this.id}" class="event__btn-more">More</button>
+            <div id="myModal" class="event__modal">
+                <div class="overlay"></div>
+                <div class="event__modal-content">
+                    Name of the Event: ${this.name}<br>
+                    Date: ${this.date}
+                    <img src="${this.image_url}">
+                    Description: ${this.description}
+                    <div class = 'form__container'>
+                        <form action="submit">
+                            <label for="name">*First Name:</label>
+                            <input type="text" id="name" required>
+                            <label for="lname">*Last Name:</label>
+                            <input type="text" id="lname" required>
+                            <label for="email">*email:</label>
+                            <input type="email" id="email" required>
+                            <label for="phone-number"> *phone: </label>
+                            <input type="text" id="phone-number" required>
+                            <label for="age">
+                                <input type="checkbox" id="age" required>
+                                *I'm old enough to participate
+                            </label>
+                            <input class="register" type="submit" value="Register">
+                        </form>
+                    </div>
+                    <button class="event__btn-less">&#9587;</button>
+
+                </div>
+
+            </div>
 
         </div>
         `
@@ -28,14 +57,12 @@ export class Event {
         if (this.displayModal) {
             moreModal.style.display = "block";
 
+        } else {
+            moreModal.style.display = "none";
         }
 
-        const overlayDiv = document.createElement("div");
-        document.body.appendChild(overlayDiv);
-        if (this.overlayOn) {
-            overlayBody.classList.add("overlay");
-        }
         this.addListenertoButton();
+        this.addListenertoButtonOff();
     }
 
     addListenertoButton = () => {
@@ -43,7 +70,15 @@ export class Event {
         
         moreButton.addEventListener(("click"), () => {
             this.displayModal = !this.displayModal;
-            this.overlayOn = !this.overlayOn;
+            this.createNewEvent();
+        })
+    }
+
+    addListenertoButtonOff = () => {
+        const lessButton = this.element.querySelector(".event__btn-less");
+
+        lessButton.addEventListener(("click"), () => {
+            this.displayModal = !this.displayModal;
             this.createNewEvent();
         })
     }
